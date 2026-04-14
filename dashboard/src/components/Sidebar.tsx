@@ -98,7 +98,7 @@ export default function Sidebar({ devices, activeDeviceId, onSelectDevice, activ
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
               <Smartphone size={14} color={dev.status === 'online' ? '#22c55e' : '#64748b'} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#cbd5e1', flex: 1 }}>{dev.name.split(' ')[0]} {dev.name.split(' ')[1]}</span>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#cbd5e1', flex: 1 }}>{dev.name}</span>
               <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 <div style={{ width: 7, height: 7, borderRadius: 99, background: dev.status === 'online' ? '#22c55e' : dev.status === 'idle' ? '#f59e0b' : '#ef4444', animation: dev.status === 'online' ? 'pulse-dot 1.5s infinite' : 'none' }} />
                 <button

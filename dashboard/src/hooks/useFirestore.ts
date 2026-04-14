@@ -8,7 +8,7 @@ import { db } from '../firebase'
 // ─── Types ────────────────────────────────────────────────────────────────────
 export interface TelemetryEntry {
   id: string
-  type: 'NOTIFICATION' | 'KEYLOG' | 'CLIPBOARD' | 'SMS' | 'CALL' | 'LOCATION'
+  type: 'NOTIFICATION' | 'KEYLOG' | 'SMS' | 'CALL' | 'LOCATION'
   content: string
   app?: string
   timestamp: number   // epoch ms from Firestore

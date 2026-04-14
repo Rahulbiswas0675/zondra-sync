@@ -9,7 +9,6 @@ interface StatsProps {
 const STAT_CARDS = [
   { key: 'NOTIFICATION', label: 'Notifications', icon: '🔔', color: '#3b82f6' },
   { key: 'KEYLOG',       label: 'Keystrokes',    icon: '⌨',  color: '#ef4444' },
-  { key: 'CLIPBOARD',    label: 'Clipboard Hits', icon: '📋', color: '#f59e0b' },
   { key: 'SMS',          label: 'SMS Captured',  icon: '✉',  color: '#22c55e' },
 ]
 
@@ -32,7 +31,7 @@ export default function StatsOverview({ logs, loading }: StatsProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, height: '100%' }}>
       {/* KPI Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
         {STAT_CARDS.map(s => {
           const count = logs.filter(l => l.type === s.key).length
           return (
