@@ -1,0 +1,29 @@
+name: Firebase Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: cd dashboard && npm install
+
+      - name: Build Dashboard
+        run: cd dashboard && npm run build
+        env:
+          VITE_AES_KEY: ${{ secrets.VITE_AES_KEY }}
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ZONDRA_SYNC }}'
+          channelId: live
+          projectId: zondra-sync

@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow authenticated admins full access to all telemetry
+    match /devices/{deviceId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Allow devices to write to their own telemetry and read their own commands
+    match /devices/{deviceId}/telemetry/{logId} {
+      allow create: if true; // In a real scenario, you'd verify a device token or secret
+    }
+
+    match /devices/{deviceId}/commands/{commandId} {
+      allow read: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']);
+    }
+
+    // App config for version checks
+    match /app_config/version {
+      allow read: if true;
+    }
+  }
+}
